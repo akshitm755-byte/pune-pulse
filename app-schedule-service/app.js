@@ -38,5 +38,5 @@ app.get('/api/schedule/scheduled/:userId', async (req, res) => {
   }
 });
 
-app.get('/health', (req, res) => res.status(200).json({ status: "OK" }));
+app.get('/api/schedule/health', (req, res) => res.status(200).json({ status: "OK" }));
 app.listen(PORT, () => console.log(`Schedule Service on port ${PORT}`));

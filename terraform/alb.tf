@@ -44,7 +44,7 @@ resource "aws_lb_target_group" "user_service" {
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
-  health_check { path = "/health" }
+  health_check { path = "/api/users/health" }
 }
 
 # --- Target Group 3: Hangout Service ---
@@ -54,7 +54,7 @@ resource "aws_lb_target_group" "hangout_service" {
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
-  health_check { path = "/health" }
+  health_check { path = "/api/hangouts/health" }
 }
 
 # --- Target Group 4: Filter Service ---
@@ -64,7 +64,7 @@ resource "aws_lb_target_group" "filter_service" {
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
-  health_check { path = "/health" }
+  health_check { path = "/api/filter/health" }
 }
 
 # --- Target Group 5: Schedule Service ---
@@ -74,7 +74,7 @@ resource "aws_lb_target_group" "schedule_service" {
   protocol    = "HTTP"
   vpc_id      = aws_vpc.main.id
   target_type = "ip"
-  health_check { path = "/health" }
+  health_check { path = "/api/schedule/health" }
 }
 
 # The ALB Listener (Listens on Port 80)

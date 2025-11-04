@@ -25,5 +25,5 @@ app.post('/api/hangouts/create', async (req, res) => {
   }
 });
 
-app.get('/health', (req, res) => res.status(200).json({ status: "OK" }));
+app.get('/api/hangouts/health', (req, res) => res.status(200).json({ status: "OK" }));
 app.listen(PORT, () => console.log(`Hangout Service on port ${PORT}`));

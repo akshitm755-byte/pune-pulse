@@ -36,5 +36,5 @@ app.get('/api/filter/eligible/:userId', async (req, res) => {
   }
 });
 
-app.get('/health', (req, res) => res.status(200).json({ status: "OK" }));
+app.get('/api/filter/health', (req, res) => res.status(200).json({ status: "OK" }));
 app.listen(PORT, () => console.log(`Filter Service on port ${PORT}`));

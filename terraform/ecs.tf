@@ -5,7 +5,7 @@ resource "aws_security_group" "ecs_service" {
   vpc_id      = aws_vpc.main.id
   ingress {
     from_port       = 0 # Allow all ports from ALB
-    to_port         = 0
+    to_port         = 65535
     protocol        = "tcp"
     security_groups = [aws_security_group.alb.id]
   }
@@ -43,7 +43,7 @@ resource "aws_ecs_task_definition" "frontend" {
   ])
 }
 resource "aws_ecs_service" "frontend" {
-  name            = "pune-pulse-frontend-service"
+  name            = "pune-pulse-frontend"
   cluster         = aws_ecs_cluster.main.id
   task_definition = aws_ecs_task_definition.frontend.arn
   desired_count   = 1

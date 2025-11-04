@@ -39,5 +39,5 @@ app.get('/api/users/user/:userId', async (req, res) => {
   }
 });
 
-app.get('/health', (req, res) => res.status(200).json({ status: "OK" }));
+app.get('/api/users/health', (req, res) => res.status(200).json({ status: "OK" }));
 app.listen(PORT, () => console.log(`User Service on port ${PORT}`));
