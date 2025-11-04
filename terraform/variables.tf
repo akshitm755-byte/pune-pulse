@@ -13,7 +13,7 @@ variable "github_oidc_thumbprint" {
 variable "github_repo" {
   description = "Your GitHub repo in format 'owner/repo'"
   type        = string
-  default     = "akshitm755/pune-pulse" # <<< EDIT THIS LATER
+  default     = "akshitm755-byte/pune-pulse" # <<< EDIT THIS LATER
 }
 
 # --- Image URI variables ---

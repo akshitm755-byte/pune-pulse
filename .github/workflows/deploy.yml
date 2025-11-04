@@ -14,10 +14,10 @@ jobs:
       matrix:
         service:
           - { name: "frontend", path: "app-frontend", port: 80 }
-          - { name: "user-service", path: "app-user-service", port: 8080 }
-          - { name: "hangout-service", path: "app-hangout-service", port: 8080 }
-          - { name: "filter-service", path: "app-filter-service", port: 8080 }
-          - { name: "schedule-service", path: "app-schedule-service", port: 8080 }
+          - { name: "user", path: "app-user-service", port: 8080 }
+          - { name: "hangout", path: "app-hangout-service", port: 8080 }
+          - { name: "filter", path: "app-filter-service", port: 8080 }
+          - { name: "schedule", path: "app-schedule-service", port: 8080 }
 
     permissions:
       id-token: write

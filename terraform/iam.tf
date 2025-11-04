@@ -106,13 +106,7 @@ resource "aws_iam_policy" "github_actions_policy" {
           "ecr:CompleteLayerUpload",
           "ecr:PutImage"
         ],
-        Resource = [
-          aws_ecr_repository.frontend.arn,
-          aws_ecr_repository.user_service.arn,
-          aws_ecr_repository.hangout_service.arn,
-          aws_ecr_repository.filter_service.arn,
-          aws_ecr_repository.schedule_service.arn
-        ]
+        Resource = "*"
       },
       {
         Effect   = "Allow",
