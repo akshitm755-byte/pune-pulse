@@ -16,11 +16,14 @@ function Navbar() {
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
+          aria-controls="navbarNav" // Added for accessibility
+          aria-expanded="false" // Added for accessibility
+          aria-label="Toggle navigation" // Added for accessibility
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto">
+        <div className="collapse navbar-collapse justify-content-between" id="navbarNav">
+          <ul className="navbar-nav"> {/* Removed me-auto */}
             <li className="nav-item">
               <NavLink className="nav-link" to="/hangouts">
                 Eligible Hangouts
@@ -37,12 +40,16 @@ function Navbar() {
               </NavLink>
             </li>
           </ul>
-          <span className="navbar-text me-3">
-            Welcome, {user.name}!
-          </span>
-          <button className="btn btn-outline-secondary" onClick={logout}>
-            Log Out
-          </button>
+          {user && ( // Only show if user is logged in (good practice)
+            <div className="d-flex align-items-center ms-auto"> {/* Added ms-auto here */}
+              <span className="navbar-text me-3">
+                Welcome, {user.name}!
+              </span>
+              <button className="btn btn-outline-secondary" onClick={logout}>
+                Log Out
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>
