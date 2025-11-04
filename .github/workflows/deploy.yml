@@ -1,0 +1,71 @@
+name: Deploy Pune Pulse Microservices
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    name: Build, Push, and Deploy
+    runs-on: ubuntu-latest
+    
+    # This runs 5 parallel jobs, one for each service
+    strategy:
+      matrix:
+        service:
+          - { name: "frontend", path: "app-frontend", port: 80 }
+          - { name: "user-service", path: "app-user-service", port: 8080 }
+          - { name: "hangout-service", path: "app-hangout-service", port: 8080 }
+          - { name: "filter-service", path: "app-filter-service", port: 8080 }
+          - { name: "schedule-service", path: "app-schedule-service", port: 8080 }
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ap-south-1 # <<< MAKE SURE THIS IS YOUR REGION
+          
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: pune-pulse-${{ matrix.service.name }} # e.g., pune-pulse-user-service
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./${{ matrix.service.path }}
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+
+      - name: Download task definition
+        id: download-task-def
+        run: |
+          aws ecs describe-task-definition --task-definition pune-pulse-${{ matrix.service.name }}-task \
+            --query taskDefinition > task-definition.json
+
+      - name: Fill in new image in task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: ${{ matrix.service.name }}-container # e.g., user-service-container
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy new task definition to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: pune-pulse-${{ matrix.service.name }}-service # e.g., pune-pulse-user-service-service
+          cluster: pune-pulse-cluster
+          wait-for-service-stability: true
