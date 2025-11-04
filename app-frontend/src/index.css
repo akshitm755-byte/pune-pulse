@@ -1,8 +1,11 @@
-/* We just need to center the app, Bootstrap handles the rest. */
+/* We just need to center the app when logging in */
 body {
   margin: 0;
+}
+
+/* This targets the login/register page */
+#root:has(.card) {
   display: flex;
   place-items: center;
-  min-width: 320px;
   min-height: 100vh;
 }
