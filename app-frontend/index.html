@@ -1,28 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pune Pulse</title>
-  <style>
-    body { font-family: sans-serif; display: grid; place-items: center; min-height: 90vh; background: #f4f4f4; }
-    h1 { color: #333; }
-    pre { background: #fff; padding: 15px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-  </style>
-</head>
-<body>
-  <div>
-    <h1>Pune Pulse (Frontend)</h1>
-    <p>This is the main dashboard. The API is live.</p>
-    <pre>
-    Test API Endpoints (with Postman):
-    POST /api/users/register
-    GET  /api/users/user/:userId
-    POST /api/hangouts/create
-    GET  /api/filter/eligible/:userId
-    POST /api/schedule/accept
-    GET  /api/schedule/scheduled/:userId
-    </pre>
-  </div>
-</body>
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pune Pulse</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
