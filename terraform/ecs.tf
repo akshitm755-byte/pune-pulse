@@ -62,7 +62,7 @@ resource "aws_ecs_service" "frontend" {
 
 # --- 2. USER Service ---
 resource "aws_ecs_task_definition" "user_service" {
-  family                   = "pune-pulse-user-task"
+  family                   = "pune-pulse-user-service-task"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = "256"
@@ -102,7 +102,7 @@ resource "aws_ecs_service" "user_service" {
 
 # --- 3. HANGOUT Service ---
 resource "aws_ecs_task_definition" "hangout_service" {
-  family                   = "pune-pulse-hangout-task"
+  family                   = "pune-pulse-hangout-service-task"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = "256"
@@ -142,7 +142,7 @@ resource "aws_ecs_service" "hangout_service" {
 
 # --- 4. FILTER Service ---
 resource "aws_ecs_task_definition" "filter_service" {
-  family                   = "pune-pulse-filter-task"
+  family                   = "pune-pulse-filter-service-task"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = "256"
@@ -182,7 +182,7 @@ resource "aws_ecs_service" "filter_service" {
 
 # --- 5. SCHEDULE Service ---
 resource "aws_ecs_task_definition" "schedule_service" {
-  family                   = "pune-pulse-schedule-task"
+  family                   = "pune-pulse-schedule-service-task"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
   cpu                      = "256"
