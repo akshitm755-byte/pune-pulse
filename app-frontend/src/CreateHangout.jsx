@@ -78,11 +78,11 @@ export default function CreateHangout() {
           <p className="text-muted small">Only show this to users who match:</p>
           <div className="row g-2 mb-3">
             <div className="col-md">
-              <label htmlFor="filter_profession" className="form-label">Profession</fabel>
+              <label htmlFor="filter_profession" className="form-label">Profession</label>
               <input type="text" className="form-control" name="filter_profession" id="filter_profession" onChange={handleFormChange} />
             </div>
             <div className="col-md">
-              <label htmlFor="filter_area" className="form-label">Area</fabel>
+              <label htmlFor="filter_area" className="form-label">Area</label>
               <input type="text" className="form-control" name="filter_area" id="filter_area" onChange={handleFormChange} />
             </div>
           </div>
